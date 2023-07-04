@@ -1,0 +1,31 @@
+#include <stdio.h>
+
+int countNumbers(int r, int prevDigit, int prevPrevDigit) {
+    if (r == 0) {
+        return 1; // Знайдено одне варіантне число з 0 розрядів
+    }
+
+    int count = 0;
+
+    if (prevDigit != 5) {
+        count += countNumbers(r - 1, 5, prevDigit);
+    }
+
+    if (prevDigit != 9 && prevPrevDigit != 9) {
+        count += countNumbers(r - 1, 9, prevDigit);
+    }
+
+    return count;
+}
+
+int main() {
+    int r;
+    printf("Введіть кількість розрядів р: ");
+    scanf("%d", &r);
+
+    int result = countNumbers(r, -1, -1); // Початкові значення для попередніх цифр: -1
+
+    printf("Кількість чисел із %d розрядами: %d\n", r, result);
+
+    return 0;
+}
